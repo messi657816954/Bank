@@ -1,4 +1,4 @@
-import json
+import requests
 from rest_framework import serializers
 from django.contrib.auth import logout
 from django.core.exceptions import ObjectDoesNotExist
@@ -8,7 +8,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from Account.Permissions import *
-from AppelFond.models import User
+from AppelFond.models import User, Tbanque
 from Account.pagination import WsPagination
 from Account.serializers import (RegistrationSerializer,
                           LoginSerializer,
@@ -33,11 +33,14 @@ class LoginAPIView(APIView):
 
     def post(self, request):
         try:
+            print("sdfdfdfdfdfdfdfdfdfdfdfdfdfdf")
+            print(request.data)
             serializer = self.serializer_class(data=request.data)
             serializer.is_valid(raise_exception=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
         except serializers.ValidationError as e:
-            return Response({'doc-type': "MG000", 'content':{'error_code':1,'error_msg': '\n'.join(e.detail['non_field_errors'])}})
+            return Response({'doc-type': "MG000", 'content':{'error_code':1,'error_msg':"Error"}})
+                #'\n'.join(e.detail['non_field_errors'])}})
         except :
             return Response({'doc-type': "MG000",
                              'content': {'error_code': 1,
@@ -119,3 +122,51 @@ class UserDeleteClientView(generics.DestroyAPIView):
     authentication_classes = []
     queryset = User.objects.all()
     serializer_class = UserDetailSerializer
+
+
+class ConsulterSoldeView(APIView):
+    def post(self, request):
+        print("Bonjour les garsssssssssssssssssssssssss")
+        print(request.data)
+        user = request.user
+        if user.is_authenticated:
+            banque_id = user.banque
+            nom_banque = Tbanque.objects.get(pk=banque_id).nom_banq
+            #compte = requests.get
+
+        return Response("tototttttttttt")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

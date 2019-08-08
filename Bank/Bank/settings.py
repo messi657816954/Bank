@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
 
+    'corsheaders',
     'allauth',
     'rest_framework',
     'rest_framework_swagger',
@@ -50,11 +51,13 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'Bank.urls'
@@ -136,6 +139,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 SITE_ID=1
+
+CORS_ORIGIN_ALLOW_ALL=True
 
 AUTH_USER_MODEL = 'AppelFond.User'
 
