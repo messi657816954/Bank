@@ -16,6 +16,8 @@ TYPE = (
     ('BANK', 'BANK'),
 )
 
+API_MSG_CODE_CREAT_BANK = 'MG022'
+
 
 
 
