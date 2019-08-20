@@ -1,13 +1,28 @@
-from django.core.paginator import Paginator
-from rest_framework import  status
+from django.shortcuts import render
+# ajout philippe
+from rest_framework import serializers, viewsets, status
+from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from AppelFond.serializers import banqSerializers, appelsSerializers, plafondSerializers
-from Bank.utils import API_MSG_CODE_CREAT_BANK
-from . import models
+from AppelFond.models import TappelFonds
+from . import models  # , users
 import requests
+import datetime
+import calendar
 from django.http import Http404
+
+from AppelFond.serializer.banqSerializers import banqSerializers
+from AppelFond.serializer.appelsSerializers import appelsSerializers
+from AppelFond.serializer.plafondSerializers import plafondSerializers
+from django.core.paginator import Paginator
+from Configurations.utils import API_MSG_CODE_CREAT_BANK, reponses_generale, USER, BANK
+from django.contrib.auth.models import User
+import socket
+from AppelFond.SocketHandler import SocketHandler
+import json
+
+
 # Create your views here.
 
 ##########################  api view banques ######################################
@@ -26,18 +41,23 @@ class banqView(APIView):
                     #         instance = models.Tbanque.Meta.model(**validated_data)
                     instance = intput_serializer.save()
                     output_serializer = banqSerializers(instance)
-                    return Response([{'doc-type': API_MSG_CODE_CREAT_BANK, 'content': output_serializer.data}],
-                                    status=status.HTTP_201_CREATED)
+                    res = reponses_generale(msg_code='MG0022', sucess=1, results=output_serializer.data)
+                    return Response(res)
                 # instance = get_object_or_404(models.Tbanque, pk=intput_serializer.data['banq_id'])
                 # output_serializer = banqSerializers(instance)
                 else:
                     return Response(intput_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                    res = reponses_generale(msg_code='MG000', sucess=0, results=intput_serializer.errors,error_code='invalid', error_msg='les données sont invalide')
+                    return Response(res)
             else:
-                return Response([{'error_code': 3, 'content': {'msg': "vous n'avez rien saisi"}}],
-                                status=status.HTTP_400_BAD_REQUEST)
-        # return Response(output_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        return Response([{'error_code': 2, 'content': {'msg': 'vous devez vous authentifier'}}],
-                        status=status.HTTP_400_BAD_REQUEST)
+                res = reponses_generale(msg_code='MG000', sucess=0, results=status.HTTP_400_BAD_REQUEST,
+                                        error_code='invalid', error_msg="vous n'avez rien saisi")
+                return Response(res)
+
+        res = reponses_generale(msg_code='MG001', sucess=0, error_code='auth1',
+                                error_msg='vous devez vous authentifier')
+        return Response(res)
+        # return Response([{'error_code': 2, 'content': {'msg': 'vous devez vous authentifier'}}], status=status.HTTP_400_BAD_REQUEST)
 
     # http://localhost:8000/%5Ebanques/?page=1
     def get(self, request, *args, **kwargs):
@@ -46,7 +66,7 @@ class banqView(APIView):
             if 'pk' in request.query_params:
                 # http://localhost:8000/%5Ebanques/?page=1/?banq_id=1
                 items = models.Tbanque.objects.filter(pk=request.query_params['pk'])
-            else:
+            elif 'pk' not in request.query_params:
                 # http://localhost:8000/%5Ebanques/?page=1
                 items = models.Tbanque.objects.all()
             paginator = Paginator(items, 5)
@@ -54,11 +74,17 @@ class banqView(APIView):
             items = paginator.get_page(page)
             print(items)
             output_serializer = banqSerializers(items, many=True)
-            return Response([{'content': output_serializer.data}])
-        return Response([{'error_code': 2, 'content': {'msg': 'vous devez vous authentifier'}}],
-                        status=status.HTTP_400_BAD_REQUEST)
+            counts = paginator.num_pages
+            res_pages = {'total_page': counts, "content": output_serializer.data}
+            res = reponses_generale(msg_code='MG0021', sucess=1, results=res_pages)
+            return Response(res)
 
-    # http://localhost:8000/%5Ebanques/?pk=1
+        res = reponses_generale(msg_code='MG001', sucess=0, error_code='auth1',
+                                error_msg='vous devez vous authentifier')
+        return Response(res)
+
+        # http://localhost:8000/%5Ebanques/?pk=1
+
     # def delete(self, request, *args, **kwargs):
     #     #item = models.TPlafond.objects.get(pk=request.query_params['pk'])
     #     item = self.get_object(request.query_params['pk'])
@@ -80,12 +106,20 @@ class banqView(APIView):
                 output_serializer.is_valid(raise_exception=True)
                 if output_serializer.is_valid(raise_exception=True):
                     output_serializer.save()
-                    return Response([{'content': output_serializer.data}])
+                    res = reponses_generale(msg_code='MG0023', sucess=1, results=output_serializer.data)
+                    return Response(res)
                 else:
-                    print(output_serializer.errors)
-                    return Response([{'content': output_serializer.errors}])
-        return Response([{'error_code': 2, 'content': {'msg': 'vous devez vous authentifier'}}],
-                        status=status.HTTP_400_BAD_REQUEST)
+                    res = reponses_generale(msg_code='MG000', sucess=0, results=output_serializer.errors,
+                                            error_code='invalid', error_msg="données invalide")
+                    return Response(res)
+            else:
+                res = reponses_generale(msg_code='MG000', sucess=0, results=output_serializer.errors,
+                                        error_code='invalid', error_msg="le pk est invalide")
+                return Response(res)
+
+        res = reponses_generale(msg_code='MG001', sucess=0, error_code='auth1',
+                                error_msg='vous devez vous authentifier')
+        return Response(res)
 
     ##################################### api view appels de fonds ##################################
 
@@ -137,7 +171,10 @@ class appelsView(APIView):
                     instance.status = 'WAIT'
                     instance.save()
                     return 'montant_cumul_max_month'
-
+            else:
+                return 'NotMontant'
+        else:
+            return 'NotClient'
         return ''
 
     # verification de plafond par banque
@@ -188,7 +225,10 @@ class appelsView(APIView):
                     instance.status = 'WAIT'
                     instance.save()
                     return 'montant_cumul_max_month'
-
+            else:
+                return 'NotMontant'
+        else:
+            return 'NotBank'
         return ''
 
     # http://localhost:8000/%5Eappels/?montant=15000&compte_id=1&compte_numero=008036&numero_recharge=697282623
@@ -200,14 +240,16 @@ class appelsView(APIView):
         # d = datetime.date(2019,8,1).timetuple()
         # print(d)
         # print(d[1])
+        print(request)
         if request.user.is_authenticated:
             data_query = {
-                'montant': request.query_params['montant'],
-                'compte_id': request.query_params['compte_id'],
-                'compte_numero': request.query_params['compte_numero'],
-                'numero_recharge': request.query_params['numero_recharge'],
+                'montant': request.data['montant'],
+                'compte_id': request.data['compte_id'],
+                'compte_numero': request.data['compte_numero'],
+                'numero_recharge': request.data['numero_recharge'],
                 'client_id': request.user.id,
                 'client_nom': request.user.username,
+                'banque_id': request.user.banque,
                 'status': 'PROGRESS'
             }
 
@@ -215,76 +257,132 @@ class appelsView(APIView):
             intput_serializer.is_valid(raise_exception=True)
             if intput_serializer.is_valid(raise_exception=True):
                 #         instance = models.Tbanque.Meta.model(**validated_data)
+                # if not data_query['banque_id']:
+                #     res = reponses_generale(msg_code='MG000', sucess=0, error_code='NotBank',
+                #                             error_msg="cet utilisateur n'a pas de banque")
+                #     return Response(res)
                 # SAUVEGARDE APPEL DE FONDS
                 instance = intput_serializer.save()
                 # VERIFICATION DES PLAFONDS
-                if request.user.type_plafond == 'USER':
+                if request.user.type_plafond == USER:
                     verif = self.verifPlafondUser(instance)
                     print(verif)
+
                     if verif == 'montant_max':
-                        return Response([
-                            {'content': {
-                                'msg': 'votre montant dépasse le max, veuillez patienter un gestionnaire va valider votre requete'}}
-                        ])
+                        # return Response([
+                        #     {'content':{'msg': 'votre montant dépasse le montant maximal que vous pouvez effectuer, veuillez patienter svp!'}}
+                        #     ])
+                        msg = 'votre montant dépasse le montant maximal que vous pouvez effectuer, veuillez patienter svp!'
+                        res = reponses_generale(msg_code='MG011', sucess=0, results=intput_serializer.data,
+                                                error_code='plafond', error_msg=msg)
+                        return Response(res)
                     elif verif == 'montant_min':
                         plafond_client = models.TPlafond.objects.get(client_id=instance.client_id)
-                        return Response([
-                            {'content': {'msg': 'vous ne pouvez faire une opération en dessous de %s' % (
-                                plafond_client.montant_min)}}
-                        ])
+                        # return Response([
+                        #     {'content':{'msg': 'vous ne pouvez faire une opération en dessous de %s' % (plafond_client.montant_min)}}
+                        #     ])
+                        msg = 'vous ne pouvez faire une opération en dessous de %s' % (plafond_client.montant_min)
+                        res = reponses_generale(msg_code='MG011', sucess=0, results=intput_serializer.data,
+                                                error_code='plafond', error_msg=msg)
+                        return Response(res)
                     elif verif == 'montant_cumul_max_week':
-                        return Response([
-                            {'content': {
-                                'msg': 'cette demande a fait dépasser le max de la semaine, veuillez patienter un gestionnaire va valider votre requete'}}
-                        ])
+                        # return Response([
+                        #     {'content':{'msg': 'cette demande a fait dépasser le maximum de la semaine, veuillez patienter svp!'}}
+                        #     ])
+                        msg = 'cette demande a fait dépasser le maximum de la semaine, veuillez patienter svp!'
+                        res = reponses_generale(msg_code='MG011', sucess=0, results=intput_serializer.data,
+                                                error_code='plafond', error_msg=msg)
+                        return Response(res)
                     elif verif == 'montant_cumul_max_month':
-                        return Response([
-                            {'content': {
-                                'msg': 'cette demande a fait dépasser le max du mois, veuillez patienter un gestionnaire va valider votre requete'}}
-                        ])
-                if request.user.type_plafond == 'BANK':
+                        # return Response([
+                        #     {'content':{'msg': 'cette demande a fait dépasser le maximum du mois, veuillez patienter svp!'}}
+                        #     ])
+                        msg = 'cette demande a fait dépasser le maximum du mois, veuillez patienter svp!'
+                        res = reponses_generale(msg_code='MG011', sucess=0, results=intput_serializer.data,
+                                                error_code='plafond', error_msg=msg)
+                        return Response(res)
+                # if request.user.type_plafond == BANK:
+                else:
                     verif = self.verifPlafondBank(instance)
                     print(verif)
+
                     if verif == 'montant_max':
-                        return Response([
-                            {'content': {
-                                'msg': 'votre montant dépasse le max autorisé par la banque, veuillez patienter un gestionnaire va valider votre requete'}}
-                        ])
+                        # return Response([
+                        #     {'content':{'msg': 'votre montant dépasse le maximum autorisé par votre banque, veuillez patienter svp!'}}
+                        #     ])
+                        msg = 'votre montant dépasse le maximum autorisé par votre banque, veuillez patienter svp!'
+                        res = reponses_generale(msg_code='MG011', sucess=0, results=intput_serializer.data,
+                                                error_code='plafond', error_msg=msg)
+                        return Response(res)
                     elif verif == 'montant_min':
                         plafond_client = models.TPlafond.objects.get(banque_id=instance.banq_id)
-                        return Response([
-                            {'content': {
-                                'msg': 'Pour cette banque vous ne pouvez faire une opération en dessous de %s' % (
-                                    plafond_client.montant_min)}}
-                        ])
+                        # return Response([
+                        #     {'content':{'msg': 'Pour cette banque vous ne pouvez faire une opération en dessous de %s' % (plafond_client.montant_min)}}
+                        #     ])
+                        msg = 'Pour cette banque vous ne pouvez faire une opération en dessous de %s' % (
+                            plafond_client.montant_min)
+                        res = reponses_generale(msg_code='MG011', sucess=0, results=intput_serializer.data,
+                                                error_code='plafond', error_msg=msg)
+                        return Response(res)
                     elif verif == 'montant_cumul_max_week':
-                        return Response([
-                            {'content': {
-                                'msg': 'cette demande a fait dépasser le max de la semaine autorisé par cette banque, veuillez patienter un gestionnaire va valider votre requete'}}
-                        ])
+                        # return Response([
+                        #     {'content':{'msg': 'cette demande a fait dépasser le maximum de la semaine autorisé par cette banque, veuillez patienter !'}}
+                        #     ])
+                        msg = 'cette demande a fait dépasser le maximum de la semaine autorisé par cette banque, veuillez patienter !'
+                        res = reponses_generale(msg_code='MG011', sucess=0, results=intput_serializer.data,
+                                                error_code='plafond', error_msg=msg)
+                        return Response(res)
                     elif verif == 'montant_cumul_max_month':
-                        return Response([
-                            {'content': {
-                                'msg': 'cette demande a fait dépasser le max du mois autorisé par cette banque, veuillez patienter un gestionnaire va valider votre requete'}}
-                        ])
+                        # return Response([
+                        #     {'content':{'msg': 'cette demande a fait dépasser le maximum du mois autorisé par cette banque, veuillez patienter svp!'}}
+                        #     ])
+                        msg = 'cette demande a fait dépasser le maximum du mois autorisé par cette banque, veuillez patienter svp!'
+                        res = reponses_generale(msg_code='MG011', sucess=0, results=intput_serializer.data,
+                                                error_code='plafond', error_msg=msg)
+                        return Response(res)
 
                 # ENVOI LAPPEL DE FONDS AU CORE ELOGE
-                # r = requests.get('url', auth=('iccsoft', 'Iccsoft2019!'))
-                # print(r.status_code) #donne le code reponse
-
+                data = {'user_id': instance.client_id.id,
+                        'transaction_key': instance.id,
+                        'account_number': instance.compte_numero,
+                        'phone_number': instance.numero_recharge,
+                        'date': instance.date,
+                        'amount': instance.montant,
+                        }
+                #s = "[{'msg_code': 'MG001', 'params': %s}]" % (data)
+                socket_obj = SocketHandler(sock=None)
+                MSG_CODE = 'MG002'
+                data_list = socket_obj.get_response(MSG_CODE,data)
                 # CHANGEMENT DU STATUS SELON LA REPONSE
-                # if r.status_code = 200:
-                #     instance.status = 'FINISH'
-                #     instance.save()
+                #if data_list[0].has_key('success'):
+                if  data_list[0]['success']:
+                    instance.status = 'FINISH'
+                    instance.save()
+                    # appel_obj = self.get_object(data_list[0]['transaction_key'])
+                    # appel_obj.status = 'FINISH'
+                    # appel_obj.save()
+                else:
+                    res = reponses_generale(msg_code=MSG_CODE, sucess=0, results='',
+                                            error_code=data_list[0]['error'][0]['err_code'], error_msg=data_list[0]['error'][0]['err_msg'])
+                    return  Response(res)
+                return Response(data_list)
 
-                output_serializer = appelsSerializers(instance)
-                return Response([{'content': output_serializer.data}], status=status.HTTP_201_CREATED)
+                # output_serializer = appelsSerializers(instance)
+                # # return Response([{'content': output_serializer.data}], status=status.HTTP_201_CREATED)
+                # res = reponses_generale(msg_code='MG0011', sucess=1, results=output_serializer.data)
+                # return Response(res)
             else:
-                Response(intput_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        return Response([{'error_code': 2, 'content': {'msg': 'vous devez vous authentifier'}}],
-                        status=status.HTTP_400_BAD_REQUEST)
+                # Response(output_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                res = reponses_generale(msg_code='MG000', sucess=0, results=intput_serializer.errors,
+                                        error_code='invalid', error_msg="données invalide")
+                return Response(res)
 
-    # http://localhost:8000/%5Eappels/?page=1
+        res = reponses_generale(msg_code='MG001', sucess=0, error_code='auth1',
+                                error_msg='vous devez vous authentifier')
+        return Response(res)
+
+        # http://localhost:8000/%5Eappels/?page=1
+
     # ceci doit servire d historique
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
@@ -310,12 +408,16 @@ class appelsView(APIView):
                 paginator = Paginator(items, 5)
                 page = request.query_params['page']
                 items = paginator.get_page(page)
-                print(items)
                 output_serializer = appelsSerializers(items, many=True)
-            return Response([{'content': output_serializer.data}])
+                counts = paginator.num_pages
+                res_pages = {'total_page': counts,"content": output_serializer.data}
+                # return Response([{'content': output_serializer.data}])
+                res = reponses_generale(msg_code='MG0011', sucess=1, results=res_pages)
+                return Response(res)
 
-        return Response([{'error_code': 2, 'content': {'msg': 'vous devez vous authentifier'}}],
-                        status=status.HTTP_400_BAD_REQUEST)
+        res = reponses_generale(msg_code='MG001', sucess=0, error_code='auth1',
+                                error_msg='vous devez vous authentifier')
+        return Response(res)
 
     # ANNULER/VALIDER LES APPELS DE FONDS
     # http://localhost:8000/%5Eappels/?pk=1/?status='FINISH' ou 'CANCEL'
@@ -344,16 +446,25 @@ class appelsView(APIView):
                             # if r.status_code = 200:
                             #     instance.status = 'FINISH'
                             #     instance.save()
+                            # res = reponses_generale(msg_code='MG0020', sucess=1, results=output_serializer.data)
+                            # return Response(res)
                         if item.status == "CANCEL":
-                            return Response([{'conten': {'msg': 'la requete a été annulée'}}])
+                            res = reponses_generale(msg_code='MG0020', sucess=1, results=output_serializer.data)
+                            return Response(res)
 
                     else:
-                        print([{'content': output_serializer.errors}])
-                        return Response([{'content': output_serializer.errors}])
-            return Response([{'content': output_serializer.data}])
+                        res = reponses_generale(msg_code='MG000', sucess=0, results=intput_serializer.errors,
+                                                error_code='invalid', error_msg="données invalide")
+                        return Response(res)
+            # return Response([{'content': output_serializer.data}])
+            else:
+                res = reponses_generale(msg_code='MG000', sucess=0, results=output_serializer.errors,
+                                        error_code='invalid', error_msg="le pk est invalide")
+                return Response(res)
 
-        return Response([{'error_code': 2, 'content': {'msg': 'vous devez vous authentifier'}}],
-                        status=status.HTTP_400_BAD_REQUEST)
+        res = reponses_generale(msg_code='MG001', sucess=0, error_code='auth1',
+                                error_msg='vous devez vous authentifier')
+        return Response(res)
 
     # def delete(self, request, *args, **kwargs):
     #     #item = models.TPlafond.objects.get(pk=request.query_params['pk'])
@@ -362,10 +473,7 @@ class appelsView(APIView):
     #     return Response(status= status.HTTP_204_NO_CONTENT)
 
     def get_object(self, pk):
-        try:
-            return models.TappelFonds.objects.get(pk=pk)
-        except models.TappelFonds.DoesNotExist:
-            raise Http404
+        return get_object_or_404(TappelFonds,pk=pk)
 
 
 ####################################### api view plafond ###################################
@@ -374,31 +482,48 @@ class plafondView(APIView):
     def post(self, request, *args, **kwargs):
         print('#####################')
         print(request.query_params)
-        intput_serializer = plafondSerializers(data=request.query_params)
-        intput_serializer.is_valid(raise_exception=True)
-        if intput_serializer.is_valid(raise_exception=True):
-            #         instance = models.Tbanque.Meta.model(**validated_data)
-            instance = intput_serializer.save()
-            output_serializer = plafondSerializers(instance)
-            return Response([{'content': output_serializer.data}], status=status.HTTP_201_CREATED)
+        if request.user.is_authenticated:
+            intput_serializer = plafondSerializers(data=request.query_params)
+            intput_serializer.is_valid(raise_exception=True)
+            if intput_serializer.is_valid(raise_exception=True):
+                #         instance = models.Tbanque.Meta.model(**validated_data)
+                instance = intput_serializer.save()
+                output_serializer = plafondSerializers(instance)
+                res = reponses_generale(msg_code='MG0024', sucess=1, results=output_serializer.data)
+                return Response(res)
+            else:
+                res = reponses_generale(msg_code='MG000', sucess=0, results=intput_serializer.errors,
+                                        error_code='invalid', error_msg="données invalide")
+                return Response(res)
 
-        return Response([{'content': intput_serializer.errors}], status=status.HTTP_400_BAD_REQUEST)
+        res = reponses_generale(msg_code='MG001', sucess=0, error_code='auth1',
+                                error_msg='vous devez vous authentifier')
+        return Response(res)
 
     # http://localhost:8000/%5Eplafond/?page=1
     def get(self, request, *args, **kwargs):
         # print(request.query_params['pk'])
-        if 'page' in request.query_params:
-            if 'pk' in request.query_params:
-                # http://localhost:8000/%5Eplafond/?page=1/?pk=1
-                items = models.TPlafond.objects.filter(pk=request.query_params['pk'])
-            else:
-                # http://localhost:8000/%5Eplafond/?page=1
-                items = models.TPlafond.objects.all()
-            paginator = Paginator(items, 5)
-            page = request.query_params['page']
-            items = paginator.get_page(page)
-            output_serializer = plafondSerializers(items, many=True)
-        return Response([{'content': output_serializer.data}])
+        if request.user.is_authenticated:
+            if 'page' in request.query_params:
+                if 'pk' in request.query_params:
+                    # http://localhost:8000/%5Eplafond/?page=1/?pk=1
+                    items = models.TPlafond.objects.filter(pk=request.query_params['pk'])
+                else:
+                    # http://localhost:8000/%5Eplafond/?page=1
+                    items = models.TPlafond.objects.all()
+                paginator = Paginator(items, 5)
+                page = request.query_params['page']
+                items = paginator.get_page(page)
+                output_serializer = plafondSerializers(items, many=True)
+                counts = paginator.num_pages
+                res_pages = {'total_page': counts, "content": output_serializer.data}
+
+                res = reponses_generale(msg_code='MG0024', sucess=1, results=res_pages)
+                return Response(res)
+
+        res = reponses_generale(msg_code='MG001', sucess=0, error_code='auth1',
+                                error_msg='vous devez vous authentifier')
+        return Response(res)
 
     # def delete(self, request, *args, **kwargs):
     #     #item = models.TPlafond.objects.get(pk=request.query_params['pk'])
@@ -414,77 +539,173 @@ class plafondView(APIView):
 
     # http://localhost:8000/%5Eplafond/?pk=1/?status='FINISH' ou 'CANCEL'
     def put(self, request, *args, **kwargs):
-        if 'pk' in request.query_params:
-            item = self.get_object(request.query_params['pk'])
+        if request.user.is_authenticated:
+            if 'pk' in request.query_params:
+                item = self.get_object(request.query_params['pk'])
 
-            output_serializer = plafondSerializers(instance=item, data=request.query_params, partial=True)
-            output_serializer.is_valid(raise_exception=True)
-            if output_serializer.is_valid(raise_exception=True):
-                output_serializer.save()
-            else:
-                print(output_serializer.errors)
-                return Response(output_serializer.errors)
-        return Response(output_serializer.data)
+                output_serializer = plafondSerializers(instance=item, data=request.query_params, partial=True)
+                output_serializer.is_valid(raise_exception=True)
+                if output_serializer.is_valid(raise_exception=True):
+                    output_serializer.save()
+
+                    res = reponses_generale(msg_code='MG0024', sucess=1, results=output_serializer.data)
+                    return Response(res)
+                else:
+                    res = reponses_generale(msg_code='MG000', sucess=0, results=output_serializer.errors,
+                                            error_code='invalid', error_msg="données invalide")
+                    return Response(res)
+
+        res = reponses_generale(msg_code='MG001', sucess=0, error_code='auth1',
+                                error_msg='vous devez vous authentifier')
+        return Response(res)
 
     ########################## api view des comptes ############################
 
 
+# Detail dun compte ou tous les compte (LES COMPTES DE QUELQU'UN)
+# parametres pk et banque_id
 class comptesView(APIView):
     # http://localhost:8000/%5Ecomptes/
     def get(self, request, *args, **kwargs):
         # print(request.query_params['pk'])
-        if 'pk' in request.query_params:
-            # http://localhost:8000/%5Ecomptes/?pk=1
-            r = requests.get('http://localhost:8000/%5Eplafond/', params={'pk': request.query_params['pk']},
-                             auth=('iccsoft', 'Iccsoft2019!'))
-            print(r.status_code)  # donne le code reponse
+        if request.user:
+            # les comptes de quelqu'un dans une banque'
+            if 'pk' in request.query_params:
+                if 'banque_id' in request.query_params:
+                    # envoi au serveur
+                    socket_obj = SocketHandler(sock=None)
+                    data = {'user_id': request.query_params['pk'], 'banque_id': request.query_params['banque_id']}
+                    # s = "[{'msg_code': 'MG001', 'params': %s}]" % (data)
+                    # socket_obj.send(bytes(s, encoding='utf8'))
+                    #
+                    # #  transfert la reponse
+                    # recep = socket_obj.receive()
+                    # ''' formatage de la reponse en json '''
+                    # rep_json = recep.decode('utf-8').replace("'", '"')
+                    # ''' formatage json enliste '''
+                    # data_list = json.loads(rep_json)
+                    MSG_CODE = 'MG001'
+                    data_list = socket_obj.get_response(MSG_CODE,data)
+                    return Response(data_list)
+                else:
+                    res = reponses_generale(msg_code='MG000', sucess=0, error_code='invalid',
+                                            error_msg="invalide banque_id")
+                    return Response(res)
 
-        else:
-            # http://localhost:8000/%5Ecomptes/
-            r = requests.get('http://localhost:8000/%5Eplafond/', auth=('iccsoft', 'Iccsoft2019!'))
-            print(r.status_code)  # donne le code reponse
+            else:
+                res = reponses_generale(msg_code='MG000', sucess=0, error_code='invalid', error_msg="invalide pk")
+                return Response(res)
 
-        return Response(r)
+        res = reponses_generale(msg_code='MG001', sucess=0, error_code='auth1',
+                                error_msg='vous devez vous authentifier')
+        return Response(res)
+
+    # liste de mes compte (MES COMPTES)
 
 
-# liste de mes compte
+# parametres
 class mescomptesView(APIView):
     # http://localhost:8000/%5Emescomptes/
     def get(self, request, *args, **kwargs):
         if request.user:
-            r = requests.get('http://localhost:8000/%5Eplafond/', params={'pk': request.user.id},
-                             auth=('iccsoft', 'Iccsoft2019!'))
-            print(r.status_code)
+            #if not request.user.banque:
+            #    res = reponses_generale(msg_code='MG000', sucess=0, error_code='NotBank',
+            #                            error_msg="cet utilisateur n'a pas de banque")
+            #    return Response(res)
+            socket_obj = SocketHandler(sock=None)
+            # envoi au serveur
+            print(request.user.id)
+            data = {'user_id': request.user.id}
+            # s = "[{'msg_code': 'MG001', 'params': %s}]" % (data)
+            # socket_obj.send(bytes(s, encoding='utf8'))
+            # #  transfert la reponse
+            # recep = socket_obj.receive()
+            # ''' formatage de la reponse en json '''
+            # rep_json = recep.decode('utf-8').replace("'", '"')
+            # ''' formatage json enliste '''
+            # data_list = json.loads(rep_json)
+            MSG_CODE = "MG001"
+            data_list = socket_obj.get_response(MSG_CODE,data)
+            return Response(data_list)
 
-            return Response(r)
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        res = reponses_generale(msg_code='MG001', sucess=0, error_code='auth1',
+                                error_msg='vous devez vous authentifier')
+        return Response(res)
+
+    #################################### liste de mes appels de fonds (HISTORIQUE)
 
 
-#################################### liste de mes appels de fonds
+# parametres page
 class mesappelsView(APIView):
     # http://localhost:8000/%5Emescomptes/
     def get(self, request, *args, **kwargs):
         if request.user:
+            if not request.user.banque:
+                res = reponses_generale(msg_code='MG000', sucess=0, error_code='NotBank',
+                                        error_msg="cet utilisateur n'a pas de banque")
+                return Response(res)
+            # items = models.TappelFonds.objects.filter(client_id=request.user.id, banque_id=request.user.banque)
             items = models.TappelFonds.objects.filter(client_id=request.user.id)
             paginator = Paginator(items, 5)
             page = request.query_params['page']
             items = paginator.get_page(page)
             output_serializer = appelsSerializers(items, many=True)
-            return Response(output_serializer.data)
-        return Response(status=status.HTTP_204_NO_CONTENT)
+            counts = paginator.num_pages
+            res_pages = {'total_page': counts, "content": output_serializer.data}
+            res = reponses_generale(msg_code='MG0025', sucess=1, results=res_pages)
+            return Response(res)
+
+        res = reponses_generale(msg_code='MG001', sucess=0, error_code='auth1',
+                                error_msg='vous devez vous authentifier')
+        return Response(res)
+
+    ################################### consulter le solde (MON SOLDE)
 
 
-################################### consulter le solde
+# parametres compte_numero
 class soldeView(APIView):
     # http://localhost:8000/%5Emescomptes/
     def get(self, request, *args, **kwargs):
         if request.user:
-            r = requests.get('http://localhost:8000/%5Eplafond/', params={'pk': request.user.id},
-                             auth=('iccsoft', 'Iccsoft2019!'))
-            print(r.status_code)
+            # if not request.user.banque:
+            #     res = reponses_generale(msg_code='MG000', sucess=0, error_code='NotBank', error_msg="cet utilisateur n'a pas de banque")
+            #     return Response(res)
 
-            return Response(r)
-        return Response(status=status.HTTP_204_NO_CONTENT)
+            socket_obj = SocketHandler(sock=None)
+            # msg = [1, 2]
+            # msg2 = {}
+            # msg3 = b"[{'1', '2'}]"
+            # socket_obj.send(bytes('auclert ca marche', encoding='utf8'))
+            # socket_obj.send(bytes(msg))
+            # socket_obj.send(bytes(msg2))
+
+            data = {'user_id': request.user.id, 'account_number': request.query_params['compte_numero']}
+            # s = "[{'msg_code': 'MG001', 'params': %s}]" % (data)
+            # socket_obj.send(bytes(s, encoding='utf8'))
+
+            # recep = socket_obj.receive()
+            # print(recep)  # en bytes code
+            # ''' formatage de la reponse en json '''
+            # rep_json = recep.decode('utf-8').replace("'", '"')
+            # ''' formatage json enliste '''
+            # data_list = json.loads(rep_json)
+            # final = json.dumps(data_list, indent=4, sort_keys=True)
+            MSG_CODE = "MG003"
+            data_list = socket_obj.get_response(MSG_CODE,data)
+            #res = reponses_generale(msg_code='MG003', sucess=1,results=data_list, error_code='',error_msg='')
+            return Response(data_list)
+
+        res = reponses_generale(msg_code='MG003', sucess=0, error_code='auth1',
+                                error_msg='vous devez vous authentifier')
+        return Response(res)
+
+
+class getAppelFondUserCountView(APIView):
+    def get(self, request, *args, **kwargs):
+        user = get_object_or_404(User, pk=self.kwargs['pk'])
+        count = TappelFonds.objects.filter(client_id=user).count()
+        res = {"count": count}
+        return Response(res)
 
 # # VERIFICATION DU PLAFOND
 # if data_query['client_id']:

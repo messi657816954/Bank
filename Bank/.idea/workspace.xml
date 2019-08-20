@@ -1,7 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9223bac1-cbdd-4b04-a6b9-1eb79486a8d0" name="Default Changelist" comment="" />
+    <list default="true" id="9223bac1-cbdd-4b04-a6b9-1eb79486a8d0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/AccountsUsers/mixins.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/AccountsUsers/serializer/CheckPasswordSerializer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/AppelFond/serializer/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/AppelFond/serializer/appelsSerializers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/AppelFond/serializer/banqSerializers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/AppelFond/serializer/plafondSerializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Account/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Account/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Account/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Account/auth.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Account/core.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Account/forms.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Account/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Account/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Account/pagination.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Account/permissions.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Account/serializers.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Account/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Account/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AppelFond/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/AppelFond/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AppelFond/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/AppelFond/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AppelFond/serializers.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AppelFond/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AppelFond/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/AppelFond/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bank/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bank/settings.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bank/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bank/utils.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bank/wsgi.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/manage.py" beforeDir="false" afterPath="$PROJECT_DIR$/manage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -11,34 +47,55 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Account/views.py">
+        <entry file="file://$PROJECT_DIR$/AccountsUsers/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="260">
-              <caret line="136" column="39" selection-start-line="136" selection-start-column="25" selection-end-line="136" selection-end-column="39" />
+            <state relative-caret-position="184">
+              <caret line="181" column="35" lean-forward="true" selection-start-line="181" selection-start-column="35" selection-end-line="181" selection-end-column="35" />
               <folding>
-                <element signature="e#0#11#0" expanded="true" />
+                <element signature="e#1#32#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Bank/urls.py">
+        <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/rest_framework/generics.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="28" selection-start-line="28" selection-end-line="28" />
+            <state relative-caret-position="298">
+              <caret line="200" column="22" selection-start-line="200" selection-start-column="22" selection-end-line="200" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/rest_framework/mixins.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="416">
+              <caret line="49" lean-forward="true" selection-start-line="49" selection-end-line="49" />
               <folding>
-                <element signature="e#628#660#0" expanded="true" />
+                <element signature="e#178#217#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AccountsUsers/serializer/RegistrationSerializer.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="440">
+              <caret line="20" column="23" lean-forward="true" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="23" />
+              <folding>
+                <element signature="e#0#38#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/AppelFond/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="335">
-              <caret line="204" column="54" lean-forward="true" selection-start-line="204" selection-start-column="54" selection-end-line="204" selection-end-column="54" />
+            <state relative-caret-position="-1981">
+              <caret line="382" lean-forward="true" selection-start-line="382" selection-end-line="382" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -46,11 +103,38 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AppelFond/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="137" column="74" lean-forward="true" selection-start-line="137" selection-start-column="4" selection-end-line="137" selection-end-column="74" />
+            <state relative-caret-position="1088">
+              <caret line="68" selection-start-line="68" selection-end-line="68" />
+              <folding>
+                <element signature="e#1#53#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Configurations/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="391">
+              <caret line="28" column="36" selection-start-line="28" selection-start-column="30" selection-end-line="28" selection-end-column="36" />
+              <folding>
+                <element signature="e#0#32#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AppelFond/SocketHandler.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="279">
+              <caret line="58" column="26" lean-forward="true" selection-start-line="58" selection-start-column="26" selection-end-line="58" selection-end-column="26" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -71,42 +155,94 @@
       <find>UserSerializer</find>
       <find>is_json</find>
       <find>SITE_ID</find>
+      <find>LoginAPIView</find>
+      <find>IsMyOwnerProfile</find>
+      <find>get</find>
+      <find>Account</find>
+      <find>Ban</find>
+      <find>Bank</find>
+      <find>_paginator</find>
+      <find>SocketHandler</find>
+      <find>ws/api/v1/appelfond/mescomptes/</find>
+      <find>msg_code</find>
+      <find>soldeView</find>
+      <find>get_response</find>
+      <find>cet utilisateur n'a pas de banque</find>
+      <find>results</find>
+      <find>instance</find>
+      <find>get_object</find>
     </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Account/forms.py" />
-        <option value="$PROJECT_DIR$/Account/admin.py" />
-        <option value="$PROJECT_DIR$/manage.py" />
-        <option value="$PROJECT_DIR$/Account/models.py" />
-        <option value="$PROJECT_DIR$/AppelFond/admin.py" />
         <option value="$PROJECT_DIR$/Account/core.py" />
-        <option value="$PROJECT_DIR$/AppelFond/models.py" />
         <option value="$PROJECT_DIR$/Account/auth.py" />
         <option value="$PROJECT_DIR$/Account/pagination.py" />
-        <option value="$PROJECT_DIR$/Account/Permissions.py" />
         <option value="$PROJECT_DIR$/Bank/utils.py" />
+        <option value="$PROJECT_DIR$/Account/Permissions.py" />
+        <option value="$PROJECT_DIR$/Account/permissions.py" />
+        <option value="$PROJECT_DIR$/AppelFond/admin.py" />
+        <option value="$PROJECT_DIR$/models/__init__.py" />
+        <option value="$PROJECT_DIR$/models/TPlafond.py" />
+        <option value="$PROJECT_DIR$/models/TappelFonds.py" />
+        <option value="$PROJECT_DIR$/models/User.py" />
+        <option value="$PROJECT_DIR$/models/Tbanque.py" />
+        <option value="$PROJECT_DIR$/Account/models.py" />
+        <option value="$PROJECT_DIR$/Account/serializer/LoginSerializer.py" />
+        <option value="$PROJECT_DIR$/Account/serializer/ChangePasswordSerializer.py" />
         <option value="$PROJECT_DIR$/Account/serializers.py" />
-        <option value="$PROJECT_DIR$/Bank/settings.py" />
-        <option value="$PROJECT_DIR$/AppelFond/views.py" />
-        <option value="$PROJECT_DIR$/AppelFond/serializers.py" />
+        <option value="$PROJECT_DIR$/models/models.py" />
         <option value="$PROJECT_DIR$/Account/views.py" />
+        <option value="$PROJECT_DIR$/Account/serializer/UserSerializer.py" />
+        <option value="$PROJECT_DIR$/Account/serializer/UserListSerializer.py" />
+        <option value="$PROJECT_DIR$/Account/serializer/UserDetailSerializer.py" />
+        <option value="$PROJECT_DIR$/Account/serializer/RegistrationSerializer.py" />
+        <option value="$PROJECT_DIR$/Account/admin.py" />
+        <option value="$PROJECT_DIR$/AppelFond/serializers.py" />
+        <option value="$PROJECT_DIR$/Account/forms.py" />
+        <option value="$PROJECT_DIR$/AccountsUsers/apps.py" />
         <option value="$PROJECT_DIR$/Bank/urls.py" />
+        <option value="$PROJECT_DIR$/Bank/settings.py" />
+        <option value="$PROJECT_DIR$/Configurations/wsgi.py" />
+        <option value="$PROJECT_DIR$/manage.py" />
+        <option value="$PROJECT_DIR$/AccountsUsers/serializer/RegistrationSerializer.py" />
+        <option value="$PROJECT_DIR$/AccountsUsers/pagination.py" />
+        <option value="$PROJECT_DIR$/AccountsUsers/serializer/CheckPassword.py" />
+        <option value="$PROJECT_DIR$/AccountsUsers/serializer/CheckPasswordSerializer.py" />
+        <option value="$PROJECT_DIR$/AccountsUsers/serializer/LoginSerializer.py" />
+        <option value="$PROJECT_DIR$/AccountsUsers/mixin.py" />
+        <option value="$PROJECT_DIR$/Configurations/settings.py" />
+        <option value="$PROJECT_DIR$/Configurations/urls.py" />
+        <option value="$PROJECT_DIR$/AccountsUsers/mixins.py" />
+        <option value="$PROJECT_DIR$/AccountsUsers/permissions.py" />
+        <option value="$PROJECT_DIR$/Configurations/utils.py" />
+        <option value="$PROJECT_DIR$/AppelFond/serializer/banqSerializers.py" />
+        <option value="$PROJECT_DIR$/AppelFond/serializer/plafondSerializers.py" />
+        <option value="$PROJECT_DIR$/AppelFond/serializer/appelsSerializers.py" />
+        <option value="$PROJECT_DIR$/AppelFond/models.py" />
+        <option value="$PROJECT_DIR$/AppelFond/views.py" />
+        <option value="$PROJECT_DIR$/AppelFond/SocketHandler.py" />
+        <option value="$PROJECT_DIR$/AccountsUsers/views.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="2635" />
-    <option name="y" value="6" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="2642" />
+    <option name="y" value="25" />
     <option name="width" value="1616" />
     <option name="height" value="912" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -117,7 +253,13 @@
             <path>
               <item name="Bank" type="b2602c69:ProjectViewProjectNode" />
               <item name="Bank" type="462c0819:PsiDirectoryNode" />
-              <item name="Account" type="462c0819:PsiDirectoryNode" />
+              <item name="AccountsUsers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Bank" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Bank" type="462c0819:PsiDirectoryNode" />
+              <item name="AccountsUsers" type="462c0819:PsiDirectoryNode" />
+              <item name="serializer" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Bank" type="b2602c69:ProjectViewProjectNode" />
@@ -127,16 +269,22 @@
             <path>
               <item name="Bank" type="b2602c69:ProjectViewProjectNode" />
               <item name="Bank" type="462c0819:PsiDirectoryNode" />
+              <item name="AppelFond" type="462c0819:PsiDirectoryNode" />
+              <item name="serializer" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Bank" type="b2602c69:ProjectViewProjectNode" />
               <item name="Bank" type="462c0819:PsiDirectoryNode" />
+              <item name="Configurations" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="settings.editor.selected.configurable" value="reference.settings.ide.settings.web.browsers" />
   </component>
   <component name="RunDashboard">
@@ -193,9 +341,9 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="2635" y="6" width="1616" height="912" extended-state="0" />
+    <frame x="2638" y="-8" width="1616" height="916" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12230672" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16793409" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -206,169 +354,339 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.35128206" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.38137755" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14321926" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32908162" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.26913264" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Python Console" order="10" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout-to-restore>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Account/forms.py">
+    <entry file="file://$PROJECT_DIR$/Account/tests.py" />
+    <entry file="file://$PROJECT_DIR$/AppelFond/migrations/0001_initial.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="61">
-          <caret line="3" column="33" lean-forward="true" selection-start-line="3" selection-start-column="33" selection-end-line="3" selection-end-column="33" />
+        <state relative-caret-position="-227">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
           <folding>
-            <element signature="e#0#24#0" expanded="true" />
+            <element signature="e#47#79#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Account/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/manage.py">
+    <entry file="file://$PROJECT_DIR$/AppelFond/migrations/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/rest_auth/registration/serializers.py">
+    <entry file="file://$PROJECT_DIR$/Account/serializer/RegistrationSerializer.py" />
+    <entry file="file://$PROJECT_DIR$/Account/serializer/UserDetailSerializer.py" />
+    <entry file="file://$PROJECT_DIR$/Account/serializer/LoginSerializer.py" />
+    <entry file="file://$PROJECT_DIR$/Account/serializer/UserListSerializer.py" />
+    <entry file="file://$PROJECT_DIR$/Account/serializer/UserSerializer.py" />
+    <entry file="file://$PROJECT_DIR$/AppelFond/serializers.py" />
+    <entry file="file://$PROJECT_DIR$/Account/views.py" />
+    <entry file="file://$PROJECT_DIR$/Account/permissions.py" />
+    <entry file="file://$PROJECT_DIR$/Account/pagination.py" />
+    <entry file="file://$PROJECT_DIR$/Account/admin.py" />
+    <entry file="file://$PROJECT_DIR$/Account/apps.py" />
+    <entry file="file://$PROJECT_DIR$/Account/forms.py" />
+    <entry file="file://$PROJECT_DIR$/AppelFond/tests.py" />
+    <entry file="file://$PROJECT_DIR$/AccountsUsers/apps.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2027">
-          <caret line="198" column="24" selection-start-line="198" selection-start-column="8" selection-end-line="198" selection-end-column="24" />
+        <state relative-caret-position="85">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AppelFond/admin.py">
+    <entry file="file://$PROJECT_DIR$/AccountsUsers/admin.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+        <state relative-caret-position="187">
+          <caret line="11" column="37" lean-forward="true" selection-start-line="11" selection-start-column="37" selection-end-line="11" selection-end-column="37" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Account/core.py">
+    <entry file="file://$PROJECT_DIR$/Bank/urls.py" />
+    <entry file="file://$PROJECT_DIR$/Bank/settings.py" />
+    <entry file="file://$PROJECT_DIR$/Configurations/wsgi.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="19" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Account/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Bank/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Account/auth.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="15" column="23" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
+        <state relative-caret-position="272">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
           <folding>
-            <element signature="e#0#10#0" expanded="true" />
+            <element signature="e#220#229#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Account/serializers.py">
+    <entry file="file://$PROJECT_DIR$/AccountsUsers/serializer/UserDetailSerializer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="952">
-          <caret line="58" selection-start-line="58" selection-end-line="58" />
+        <state>
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/django/conf/__init__.py">
+    <entry file="file://$PROJECT_DIR$/AccountsUsers/serializer/UserListSerializer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="373">
-          <caret line="73" column="9" selection-start-line="73" selection-start-column="9" selection-end-line="73" selection-end-column="9" />
+        <state>
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AccountsUsers/serializer/UserSerializer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppelFond/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AccountsUsers/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1248">
+          <caret line="52" column="25" selection-start-line="52" selection-start-column="6" selection-end-line="52" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppelFond/apps.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AccountsUsers/serializer/ChangePasswordSerializer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" lean-forward="true" selection-end-line="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AccountsUsers/serializer/CheckPasswordSerializer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="29" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="29" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/requirements.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="28" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
+        <state relative-caret-position="-612">
+          <caret line="8" column="17" lean-forward="true" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Bank/settings.py">
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/rest_framework/exceptions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="145" selection-start-line="145" selection-end-line="145" />
+        <state relative-caret-position="235">
+          <caret line="149" column="24" lean-forward="true" selection-start-line="149" selection-start-column="24" selection-end-line="149" selection-end-column="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Account/Permissions.py">
+    <entry file="file://$PROJECT_DIR$/AccountsUsers/serializer/LoginSerializer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="12" column="25" lean-forward="true" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/rest_framework/pagination.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-500">
+          <caret line="314" column="7" lean-forward="true" selection-start-line="314" selection-start-column="7" selection-end-line="314" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Configurations/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2516">
+          <caret line="148" column="14" selection-start-line="148" selection-end-line="148" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AccountsUsers/pagination.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="35" selection-start-line="2" selection-start-column="35" selection-end-line="2" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppelFond/migrations/0011_auto_20190812_1456.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="494">
+          <caret line="27" column="30" lean-forward="true" selection-start-line="27" selection-start-column="30" selection-end-line="27" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppelFond/serializer/banqSerializers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="7" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
+          <folding>
+            <element signature="e#0#46#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppelFond/serializer/plafondSerializers.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Account/pagination.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AppelFond/serializers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
           <folding>
-            <element signature="e#0#65#0" expanded="true" />
+            <element signature="e#0#46#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AppelFond/views.py">
+    <entry file="file://$PROJECT_DIR$/AppelFond/serializer/appelsSerializers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="204" column="54" lean-forward="true" selection-start-line="204" selection-start-column="54" selection-end-line="204" selection-end-column="54" />
+        <state relative-caret-position="323">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
           <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Bank/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="28" selection-start-line="28" selection-end-line="28" />
-          <folding>
-            <element signature="e#628#660#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Account/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="136" column="39" selection-start-line="136" selection-start-column="25" selection-end-line="136" selection-end-column="39" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#0#46#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/AppelFond/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="137" column="74" lean-forward="true" selection-start-line="137" selection-start-column="4" selection-end-line="137" selection-end-column="74" />
+        <state relative-caret-position="1088">
+          <caret line="68" selection-start-line="68" selection-end-line="68" />
+          <folding>
+            <element signature="e#1#53#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AccountsUsers/permissions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Configurations/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="28" column="36" selection-start-line="28" selection-start-column="30" selection-end-line="28" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AccountsUsers/mixins.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Configurations/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="87" selection-start-line="20" selection-start-column="87" selection-end-line="20" selection-end-column="87" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AccountsUsers/serializer/RegistrationSerializer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="440">
+          <caret line="20" column="23" lean-forward="true" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppelFond/SocketHandler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="58" column="26" lean-forward="true" selection-start-line="58" selection-start-column="26" selection-end-line="58" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/rest_framework/generics.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="298">
+          <caret line="200" column="22" selection-start-line="200" selection-start-column="22" selection-end-line="200" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/rest_framework/mixins.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="416">
+          <caret line="49" lean-forward="true" selection-start-line="49" selection-end-line="49" />
+          <folding>
+            <element signature="e#178#217#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AccountsUsers/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="181" column="35" lean-forward="true" selection-start-line="181" selection-start-column="35" selection-end-line="181" selection-end-column="35" />
+          <folding>
+            <element signature="e#1#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppelFond/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1981">
+          <caret line="382" lean-forward="true" selection-start-line="382" selection-end-line="382" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
