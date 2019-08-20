@@ -1,7 +1,6 @@
-from django.shortcuts import render
-# ajout philippe
-from rest_framework import serializers, viewsets, status
-from rest_framework.generics import get_object_or_404
+from django.core.paginator import Paginator
+from django.shortcuts import get_object_or_404
+from rest_framework import  status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -43,6 +42,7 @@ class banqView(APIView):
                     output_serializer = banqSerializers(instance)
                     res = reponses_generale(msg_code='MG0022', sucess=1, results=output_serializer.data)
                     return Response(res)
+
                 # instance = get_object_or_404(models.Tbanque, pk=intput_serializer.data['banq_id'])
                 # output_serializer = banqSerializers(instance)
                 else:
@@ -67,6 +67,7 @@ class banqView(APIView):
                 # http://localhost:8000/%5Ebanques/?page=1/?banq_id=1
                 items = models.Tbanque.objects.filter(pk=request.query_params['pk'])
             elif 'pk' not in request.query_params:
+
                 # http://localhost:8000/%5Ebanques/?page=1
                 items = models.Tbanque.objects.all()
             paginator = Paginator(items, 5)
@@ -84,7 +85,6 @@ class banqView(APIView):
         return Response(res)
 
         # http://localhost:8000/%5Ebanques/?pk=1
-
     # def delete(self, request, *args, **kwargs):
     #     #item = models.TPlafond.objects.get(pk=request.query_params['pk'])
     #     item = self.get_object(request.query_params['pk'])
@@ -250,6 +250,7 @@ class appelsView(APIView):
                 'client_id': request.user.id,
                 'client_nom': request.user.username,
                 'banque_id': request.user.banque,
+
                 'status': 'PROGRESS'
             }
 
@@ -382,6 +383,7 @@ class appelsView(APIView):
         return Response(res)
 
         # http://localhost:8000/%5Eappels/?page=1
+
 
     # ceci doit servire d historique
     def get(self, request, *args, **kwargs):
@@ -771,3 +773,4 @@ class getAppelFondUserCountView(APIView):
 #             return Response([{
 #                                  'msg': 'cette demande a fait dépasser le max du mois, veuillez patienter un gestionnaire va valider votre requete'
 #                             }])
+

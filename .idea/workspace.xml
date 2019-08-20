@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="cb2d2186-b264-4dff-af6a-b530f0572ac2" name="Default Changelist" comment="" />
+=======
+    <list default="true" id="cb2d2186-b264-4dff-af6a-b530f0572ac2" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/Bank/AppelFond/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Bank/AppelFond/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bank/AppelFond/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Bank/AppelFond/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bank/Bank/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Bank/Bank/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bank/Bank/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/Bank/Bank/utils.py" afterDir="false" />
+    </list>
+>>>>>>> b2260b25ceb0c990896940322af98465347db3a3
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -10,7 +19,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+<<<<<<< HEAD
       <file pinned="false" current-in-tab="false">
+=======
+      <file pinned="false" current-in-tab="true">
+>>>>>>> b2260b25ceb0c990896940322af98465347db3a3
         <entry file="file://$PROJECT_DIR$/Bank/AppelFond/views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="213">
@@ -22,6 +35,7 @@
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Bank/Bank/settings.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -31,6 +45,8 @@
           </provider>
         </entry>
       </file>
+=======
+>>>>>>> b2260b25ceb0c990896940322af98465347db3a3
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Bank/Bank/utils.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -137,7 +153,10 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+<<<<<<< HEAD
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+=======
+>>>>>>> b2260b25ceb0c990896940322af98465347db3a3
     <property name="settings.editor.selected.configurable" value="editor.preferences.import" />
   </component>
   <component name="RunDashboard">
@@ -170,11 +189,19 @@
     <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
+<<<<<<< HEAD
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24968314" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Python Console" />
       <window_info anchor="bottom" id="Terminal" visible="true" weight="0.32908162" />
+=======
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24968314" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Python Console" />
+      <window_info active="true" anchor="bottom" id="Terminal" visible="true" weight="0.32908162" />
+>>>>>>> b2260b25ceb0c990896940322af98465347db3a3
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -226,6 +253,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/Bank/Bank/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
@@ -233,5 +261,7 @@
         </state>
       </provider>
     </entry>
+=======
+>>>>>>> b2260b25ceb0c990896940322af98465347db3a3
   </component>
 </project>
