@@ -29,7 +29,7 @@ django-taggit==0.17.1
 djangorestframework==3.9.0
 djangorestframework-filters==0.11.1
 et-xmlfile==1.0.1
-httpie==1.0.2
+httpie==3.1.0
 idna==2.8
 isort==4.3.4
 itypes==1.1.0
