@@ -42,7 +42,7 @@ Markdown==3.0.1
 MarkupSafe==1.1.1
 mccabe==0.6.1
 mysql==0.0.2
-mysql-connector-python==8.0.13
+mysql-connector-python==8.0.14
 mysqlclient==1.3.14
 oauthlib==3.0.2
 OdooRPC==0.7.0
